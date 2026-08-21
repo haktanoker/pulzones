@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #08090f;
+  --surface: #12141c;
+  --surface-hover: #181b26;
+  --border: #232838;
+  --text-primary: #edf0f5;
+  --text-secondary: #838ea3;
+  --text-tertiary: #4c5468;
+  --pulse: #ff3b5c;
+  --pulse-dim: #ff3b5c26;
+  --accent2: #7c5cff;
+  --accent2-dim: #7c5cff26;
+
+  --z1: #6b7280;
+  --z2: #3b9bff;
+  --z3: #22e0a0;
+  --z4: #ffb020;
+  --z5: #ff3b5c;
+
+  --font-display: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(1100px 550px at 12% -8%, rgba(255, 59, 92, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 92% 4%, rgba(124, 92, 255, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--pulse-dim);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+@keyframes pulse-beat {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.pulse-dot {
+  animation: pulse-beat 1.6s ease-in-out infinite;
+  box-shadow: 0 0 10px 2px var(--pulse);
+}
+
+/* ---------- Kart ---------- */
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0)), var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  border-color: rgba(255, 59, 92, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 59, 92, 0.12), 0 12px 32px -16px rgba(255, 59, 92, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ---------- Butonlar ---------- */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--pulse), #ff6b45);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 59, 92, 0.45), 0 0 26px -4px rgba(255, 59, 92, 0.65);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-pill:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 1px rgba(255, 59, 92, 0.6), 0 0 34px -2px rgba(255, 59, 92, 0.85);
+  transform: translateY(-1px);
+}
+.btn-pill:active {
+  transform: translateY(0);
+}
+.btn-pill:disabled {
+  opacity: 0.55;
+  cursor: default;
+  transform: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 59, 92, 0.4);
+  box-shadow: 0 0 18px -8px rgba(255, 59, 92, 0.5);
+}
+
+/* ---------- Segmented control (dönem / interval seçici) ---------- */
+.segmented {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  gap: 2px;
+}
+.segmented-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.segmented-btn.active {
+  background: linear-gradient(135deg, var(--pulse), #ff6b45);
+  color: #fff;
+  box-shadow: 0 0 18px -3px rgba(255, 59, 92, 0.65);
+}
+.segmented-btn:not(.active):hover {
+  color: var(--text-primary);
+}
+
+/* ---------- Input ---------- */
+.input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 13px;
+  font-size: 14px;
+  color: var(--text-primary);
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--pulse);
+  box-shadow: 0 0 0 3px rgba(255, 59, 92, 0.15);
+}
+
+/* ---------- Nav glow çizgisi ---------- */
+.nav-glow-border {
+  position: relative;
+}
+.nav-glow-border::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 59, 92, 0.5), rgba(124, 92, 255, 0.5), transparent);
+}

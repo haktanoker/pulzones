@@ -1,0 +1,36 @@
+# dependencies
+node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js build output
+/.next/
+/out/
+
+# production
+/build
+
+# env dosyaları — HASSAS BİLGİLER (Strava API key, secret vs.)
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# senin özel ekleme
+data/activities/*.json
+
+# hassas veri
+data/strava-tokens.json
+data/settings.json
