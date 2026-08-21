@@ -8,18 +8,9 @@ import {
   formatTimeTr,
 } from "@/lib/format";
 
-// Sağdaki istatistik sütunlarının genişlikleri — header (ActivityRowHeader)
-// ile senkron kalması için tek yerden yönetiliyor. Birini değiştirirsen
-// diğerini de burada değiştir, ikisi otomatik hizalı kalır.
-const W_WEATHER = "w-14";
-const W_DISTANCE = "w-18";
-const W_TIME = "w-16";
-const W_PACE = "hidden sm:inline-block w-14";
-const W_CALORIES = "w-24 whitespace-nowrap";
-
 export function ActivityRowHeader() {
   return (
-    <div className="flex items-center justify-between px-4 pb-1">
+    <div className="activity-row-header flex items-center justify-between px-4 pb-1">
       <span
         className="text-[11px] uppercase tracking-wider"
         style={{ color: "var(--text-tertiary)" }}
@@ -27,14 +18,14 @@ export function ActivityRowHeader() {
         Koşu
       </span>
       <div
-        className="flex items-center gap-5 font-display text-[11px] uppercase tracking-wider"
-        style={{ color: "var(--text-tertiary)" }}
+        className="activity-row__stats"
+        style={{ color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.05em", fontSize: 11 }}
       >
-        <span className={`${W_WEATHER} text-center`}>Hava</span>
-        <span className={`${W_DISTANCE} text-center`}>Mesafe</span>
-        <span className={`${W_TIME} text-center`}>Süre</span>
-        <span className={`${W_PACE} text-center`}>Pace</span>
-        <span className={`${W_CALORIES} text-center`}>Kalori</span>
+        <span className="activity-row__stat activity-row__weather">Hava</span>
+        <span className="activity-row__stat">Mesafe</span>
+        <span className="activity-row__stat">Süre</span>
+        <span className="activity-row__stat activity-row__pace">Pace</span>
+        <span className="activity-row__stat">Kalori</span>
       </div>
     </div>
   );
@@ -44,11 +35,8 @@ export function ActivityRow({ activity }: { activity: ActivitySummary }) {
   const distanceKm = (activity.distance / 1000).toFixed(2);
 
   return (
-    <Link
-      href={`/kosu/${activity.id}`}
-      className="card card-hover flex items-center justify-between px-4 py-3.5 group"
-    >
-      <div className="flex flex-col gap-0.5 min-w-0">
+    <Link href={`/kosu/${activity.id}`} className="card card-hover activity-row px-4 py-3.5 group">
+      <div className="activity-row__main">
         <span className="text-sm font-medium truncate group-hover:text-white transition-colors">
           {activity.name}
         </span>
@@ -57,31 +45,44 @@ export function ActivityRow({ activity }: { activity: ActivitySummary }) {
         </span>
       </div>
 
-      <div className="flex items-center gap-5 shrink-0 font-display text-sm">
+      <div className="activity-row__stats">
         {activity.weather ? (
-          <span className={`${W_WEATHER} text-left`} style={{ color: "var(--text-secondary)" }}>
+          <span
+            className="activity-row__stat activity-row__weather"
+            style={{ color: "var(--text-secondary)" }}
+          >
             {activity.weather.icon} {activity.weather.temperature}°
           </span>
         ) : (
-          <span className={`${W_WEATHER} text-left`} style={{ color: "var(--text-tertiary)" }}>
+          <span
+            className="activity-row__stat activity-row__weather"
+            style={{ color: "var(--text-tertiary)" }}
+          >
             -
           </span>
         )}
-        <span className={`${W_DISTANCE} text-left`}>
+
+        <span className="activity-row__stat">
           {distanceKm} <span style={{ color: "var(--text-tertiary)" }}>km</span>
         </span>
-        <span className={`${W_TIME} text-left`} style={{ color: "var(--text-secondary)" }}>
+
+        <span className="activity-row__stat" style={{ color: "var(--text-secondary)" }}>
           {formatDurationShort(activity.moving_time)}
         </span>
-        <span className={`${W_PACE} text-left`} style={{ color: "var(--text-secondary)" }}>
+
+        <span
+          className="activity-row__stat activity-row__pace"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {formatPace(activity.distance, activity.moving_time)}
         </span>
+
         {activity.calories ? (
-          <span className={`${W_CALORIES} text-left`} style={{ color: "var(--pulse)" }}>
+          <span className="activity-row__stat" style={{ color: "var(--pulse)" }}>
             {formatCalories(activity.calories)} kcal
           </span>
         ) : (
-          <span className={`${W_CALORIES} text-left`} style={{ color: "var(--text-tertiary)" }}>
+          <span className="activity-row__stat" style={{ color: "var(--text-tertiary)" }}>
             -
           </span>
         )}

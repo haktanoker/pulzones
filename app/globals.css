@@ -41,6 +41,11 @@ body {
   min-height: 100vh;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 .font-display {
   font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
@@ -193,4 +198,93 @@ body {
   bottom: -1px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 59, 92, 0.5), rgba(124, 92, 255, 0.5), transparent);
+}
+
+/* =================================================================
+   MOBİL RESPONSIVE KURALLARI
+   Buradaki sınırların altına inildiğinde ilgili elemanlar
+   otomatik olarak yeniden düzenlenir / küçülür / gizlenir.
+   ================================================================= */
+
+/* ---------- Koşu listesi satırı (ActivityRow) ---------- */
+/* Masaüstü/tablet varsayılanı: tek satır, sağda istatistikler */
+.activity-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+.activity-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 140px;
+}
+.activity-row__stats {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+}
+.activity-row__stat {
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* 700px altı: aralar sıkışsın, yazı boyutu küçülsün */
+@media (max-width: 700px) {
+  .activity-row__stats {
+    gap: 12px;
+    font-size: 12.5px;
+  }
+  .activity-row__pace {
+    display: none; /* pace bilgisi dar ekranda gizlenir, detay sayfasında zaten var */
+  }
+}
+
+/* 520px altı: satır ikiye bölünür, üstte isim/tarih, altta istatistikler */
+@media (max-width: 520px) {
+  .activity-row {
+    flex-wrap: wrap;
+  }
+  .activity-row__main {
+    flex: 1 1 100%;
+  }
+  .activity-row__stats {
+    flex: 1 1 100%;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 8px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .activity-row__weather {
+    display: none; /* çok dar ekranda hava durumu ikonu gizlenir */
+  }
+}
+
+/* Liste başlığı (ActivityRowHeader) - çok dar ekranda kafa karıştırmasın diye gizlenir */
+@media (max-width: 520px) {
+  .activity-row-header {
+    display: none;
+  }
+}
+
+/* ---------- Üst istatistik kartları (dashboard + koşu detay) ---------- */
+@media (max-width: 420px) {
+  .card .font-display.text-3xl,
+  .card .font-display.text-2xl {
+    font-size: 1.35rem;
+  }
+}
+
+/* ---------- Genel kart iç boşluğu - çok dar ekranda daralt ---------- */
+@media (max-width: 420px) {
+  .card {
+    border-radius: 14px;
+  }
 }
