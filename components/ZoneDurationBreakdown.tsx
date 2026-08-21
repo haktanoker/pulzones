@@ -18,48 +18,41 @@ export function ZoneDurationBreakdown({
   return (
     <div className="card p-5 flex flex-col gap-3">
       <h2 className="text-sm font-medium">Bölge Dağılımı</h2>
-      <div
-        className="grid gap-x-3 gap-y-2.5 items-center"
-        style={{ gridTemplateColumns: "minmax(0, 20%) 1fr auto auto" }}
-      >
+      <div className="flex flex-col gap-3">
         {zones.map((z) => {
           const sec = durations[z.key];
           const pct = totalSec > 0 ? (sec / totalSec) * 100 : 0;
           return (
-            <>
+            <div key={z.key} className="zone-row">
               <span
-                key={`${z.key}-label`}
-                className="text-xs truncate"
-                style={{ color: "var(--text-secondary)" }}
+                className="zone-row__label text-xs truncate"
+                style={{ color: "var(--text-secondary)", gridArea: "label" }}
                 title={`${z.label} (${z.min}-${z.max})`}
               >
                 {z.label} ({z.min}-{z.max})
               </span>
+              <span
+                className="zone-row__dur text-xs text-right whitespace-nowrap"
+                style={{ color: "var(--text-primary)", gridArea: "dur" }}
+              >
+                {formatDurationShort(sec)}
+              </span>
+              <span
+                className="zone-row__pct text-xs text-right whitespace-nowrap"
+                style={{ color: "var(--text-tertiary)", gridArea: "pct" }}
+              >
+                %{Math.round(pct)}
+              </span>
               <div
-                key={`${z.key}-bar`}
-                className="h-2 rounded-full overflow-hidden"
-                style={{ background: "var(--bg)" }}
+                className="zone-row__bar h-2 rounded-full overflow-hidden"
+                style={{ background: "var(--bg)", gridArea: "bar" }}
               >
                 <div
                   className="h-full rounded-full transition-all"
                   style={{ width: `${pct}%`, background: z.color }}
                 />
               </div>
-              <span
-                key={`${z.key}-dur`}
-                className="font-display text-xs text-right whitespace-nowrap"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {formatDurationShort(sec)}
-              </span>
-              <span
-                key={`${z.key}-pct`}
-                className="font-display text-xs text-right whitespace-nowrap"
-                style={{ color: "var(--text-tertiary)" }}
-              >
-                %{Math.round(pct)}
-              </span>
-            </>
+            </div>
           );
         })}
       </div>

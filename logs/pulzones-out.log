@@ -116,3 +116,39 @@ Terminate batch job (Y/N)?
 ✓ Ready in 401ms
 ✓ Running next.config.ts took 102ms
 Terminate batch job (Y/N)? 
+> nabiz-app@0.1.0 start
+> next start -p 3003
+
+▲ Next.js 16.3.1
+- Local:         http://localhost:3003
+- Network:       http://31.57.33.11:3003
+✓ Ready in 550ms
+✓ Running next.config.ts took 87ms
+Terminate batch job (Y/N)? 
+> nabiz-app@0.1.0 start
+> next start -p 3003
+
+▲ Next.js 16.3.1
+- Local:         http://localhost:3003
+- Network:       http://31.57.33.11:3003
+✓ Ready in 1799ms
+✓ Running next.config.ts took 174ms
+Terminate batch job (Y/N)? 
+> nabiz-app@0.1.0 start
+> next start -p 3003
+
+▲ Next.js 16.3.1
+- Local:         http://localhost:3003
+- Network:       http://31.57.33.11:3003
+✓ Ready in 512ms
+✓ Running next.config.ts took 105ms
+Terminate batch job (Y/N)? 
+> nabiz-app@0.1.0 start
+> next start -p 3003
+
+▲ Next.js 16.3.1
+- Local:         http://localhost:3003
+- Network:       http://31.57.33.11:3003
+✓ Ready in 475ms
+✓ Running next.config.ts took 104ms
+Terminate batch job (Y/N)? 

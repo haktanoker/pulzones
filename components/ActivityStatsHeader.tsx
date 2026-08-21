@@ -63,7 +63,7 @@ export function ActivityStatsHeader({
         <BigStat
           label="Ort. Pace"
           value={formatPace(activity.distance, activity.moving_time).replace(
-            " /km",
+            "/km",
             "",
           )}
           unit="/km"

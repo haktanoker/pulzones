@@ -19,7 +19,12 @@ export function ActivityRowHeader() {
       </span>
       <div
         className="activity-row__stats"
-        style={{ color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.05em", fontSize: 11 }}
+        style={{
+          color: "var(--text-tertiary)",
+          textTransform: "uppercase",
+          letterSpacing: "0.05em",
+          fontSize: 11,
+        }}
       >
         <span className="activity-row__stat activity-row__weather">Hava</span>
         <span className="activity-row__stat">Mesafe</span>
@@ -35,24 +40,33 @@ export function ActivityRow({ activity }: { activity: ActivitySummary }) {
   const distanceKm = (activity.distance / 1000).toFixed(2);
 
   return (
-    <Link href={`/kosu/${activity.id}`} className="card card-hover activity-row px-4 py-3.5 group">
+    <Link
+      href={`/kosu/${activity.id}`}
+      className="card card-hover activity-row px-4 py-3.5 group"
+    >
       <div className="activity-row__main">
         <span className="text-sm font-medium truncate group-hover:text-white transition-colors">
           {activity.name}
         </span>
         <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>
-          {formatDateShortTr(activity.start_date_local)} · {formatTimeTr(activity.start_date_local)}
+          {formatDateShortTr(activity.start_date_local)} ·{" "}
+          {formatTimeTr(activity.start_date_local)}
         </span>
       </div>
 
       <div className="activity-row__stats">
         {activity.weather ? (
-          <span
+          <div
             className="activity-row__stat activity-row__weather"
             style={{ color: "var(--text-secondary)" }}
           >
-            {activity.weather.icon} {activity.weather.temperature}°
-          </span>
+            <span className="activity-row__weather-icon">
+              {activity.weather.icon}
+            </span>
+            <span className="activity-row__weather-temp">
+              {activity.weather.temperature}°
+            </span>
+          </div>
         ) : (
           <span
             className="activity-row__stat activity-row__weather"
@@ -66,7 +80,10 @@ export function ActivityRow({ activity }: { activity: ActivitySummary }) {
           {distanceKm} <span style={{ color: "var(--text-tertiary)" }}>km</span>
         </span>
 
-        <span className="activity-row__stat" style={{ color: "var(--text-secondary)" }}>
+        <span
+          className="activity-row__stat"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {formatDurationShort(activity.moving_time)}
         </span>
 
@@ -78,11 +95,17 @@ export function ActivityRow({ activity }: { activity: ActivitySummary }) {
         </span>
 
         {activity.calories ? (
-          <span className="activity-row__stat" style={{ color: "var(--pulse)" }}>
+          <span
+            className="activity-row__stat"
+            style={{ color: "var(--pulse)" }}
+          >
             {formatCalories(activity.calories)} kcal
           </span>
         ) : (
-          <span className="activity-row__stat" style={{ color: "var(--text-tertiary)" }}>
+          <span
+            className="activity-row__stat"
+            style={{ color: "var(--text-tertiary)" }}
+          >
             -
           </span>
         )}

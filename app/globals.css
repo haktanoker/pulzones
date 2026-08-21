@@ -200,6 +200,16 @@ html, body {
   background: linear-gradient(90deg, transparent, rgba(255, 59, 92, 0.5), rgba(124, 92, 255, 0.5), transparent);
 }
 
+/* ---------- Bölge Dağılımı satırı (ZoneDurationBreakdown) ---------- */
+.zone-row {
+  display: grid;
+  grid-template-columns: minmax(0, 26%) 1fr auto auto;
+  grid-template-areas: "label bar dur pct";
+  column-gap: 12px;
+  row-gap: 6px;
+  align-items: center;
+}
+
 /* =================================================================
    MOBİL RESPONSIVE KURALLARI
    Buradaki sınırların altına inildiğinde ilgili elemanlar
@@ -235,6 +245,33 @@ html, body {
   text-align: right;
 }
 
+.activity-row__weather {
+  text-align: center;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1.15;
+  min-width: 34px; */
+}
+
+/* Tablo hizası: her istatistik sütunu sabit genişlikte, içerik uzunluğundan bağımsız */
+.activity-row__stats > .activity-row__stat:nth-child(1) { width: 44px; }  /* Hava */
+.activity-row__stats > .activity-row__stat:nth-child(2) { width: 64px; }  /* Mesafe */
+.activity-row__stats > .activity-row__stat:nth-child(3) { width: 60px; }  /* Süre */
+.activity-row__stats > .activity-row__stat:nth-child(4) { width: 52px; }  /* Pace */
+.activity-row__stats > .activity-row__stat:nth-child(5) { width: 72px; }  /* Kalori */
+
+.activity-row__weather-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+.activity-row__weather-temp {
+  font-size: 11px;
+  line-height: 1;
+}
+
 /* 700px altı: aralar sıkışsın, yazı boyutu küçülsün */
 @media (max-width: 700px) {
   .activity-row__stats {
@@ -262,15 +299,23 @@ html, body {
     margin-top: 6px;
     border-top: 1px solid var(--border);
   }
-  .activity-row__weather {
-    display: none; /* çok dar ekranda hava durumu ikonu gizlenir */
-  }
 }
 
 /* Liste başlığı (ActivityRowHeader) - çok dar ekranda kafa karıştırmasın diye gizlenir */
 @media (max-width: 520px) {
   .activity-row-header {
     display: none;
+  }
+}
+
+/* Bölge Dağılımı: dar ekranda üstte etiket+süre+yüzde, altta bar tam genişlik */
+@media (max-width: 480px) {
+  .zone-row {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "label dur pct"
+      "bar bar bar";
+    row-gap: 5px;
   }
 }
 
