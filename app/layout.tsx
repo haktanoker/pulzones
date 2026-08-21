@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pulzonez | Koşu Analizi",
+  title: "Pulzones | Koşu Analizi",
   description: "Kişisel koşu ve nabız zone analizi",
   icons: {
     icon: "/favicon.ico",

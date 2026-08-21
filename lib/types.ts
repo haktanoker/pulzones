@@ -1,3 +1,5 @@
+import { WeatherInfo } from "./weather";
+
 export interface ActivitySummary {
   id: number;
   name: string;
@@ -12,4 +14,5 @@ export interface ActivitySummary {
   max_heartrate?: number;
   calories?: number;
   average_speed: number;
+  weather?: WeatherInfo | null;
 }

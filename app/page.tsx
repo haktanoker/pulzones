@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { PeriodSelector, Period } from "@/components/PeriodSelector";
 import { StatCard } from "@/components/StatCard";
-import { ActivityRow } from "@/components/ActivityRow";
+import { ActivityRow, ActivityRowHeader } from "@/components/ActivityRow";
 import { ActivitySummary } from "@/lib/types";
 import {
   formatDurationShort,
@@ -149,6 +149,7 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="flex flex-col gap-2">
+                <ActivityRowHeader />
                 {filtered
                   .sort(
                     (a, b) =>

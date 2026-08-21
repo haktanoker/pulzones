@@ -11,6 +11,7 @@ import {
   readAllCachedActivities,
   CachedActivity,
 } from "@/lib/activityCache";
+import { getWeatherForActivity } from "@/lib/weather";
 
 export async function GET() {
   if (!isStravaConnected()) {
@@ -26,6 +27,15 @@ export async function GET() {
 
       const detail = await fetchActivityDetail(run.id);
       const streams = await fetchActivityStreams(run.id);
+
+      const firstPoint = streams.latlng?.[0];
+      const weather = firstPoint
+        ? await getWeatherForActivity(
+            firstPoint[0],
+            firstPoint[1],
+            detail.start_date_local,
+          )
+        : null;
 
       const cached: CachedActivity = {
         id: run.id,
@@ -54,6 +64,7 @@ export async function GET() {
         description: detail.description,
         splits_metric: detail.splits_metric,
         streams,
+        weather,
         cachedAt: new Date().toISOString(),
       };
 

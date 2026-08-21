@@ -18,20 +18,26 @@ export function ZoneDurationBreakdown({
   return (
     <div className="card p-5 flex flex-col gap-3">
       <h2 className="text-sm font-medium">Bölge Dağılımı</h2>
-      <div className="flex flex-col gap-2.5">
+      <div
+        className="grid gap-x-3 gap-y-2.5 items-center"
+        style={{ gridTemplateColumns: "minmax(0, 20%) 1fr auto auto" }}
+      >
         {zones.map((z) => {
           const sec = durations[z.key];
           const pct = totalSec > 0 ? (sec / totalSec) * 100 : 0;
           return (
-            <div key={z.key} className="flex items-center gap-3">
+            <>
               <span
-                className="text-xs w-32 shrink-0"
+                key={`${z.key}-label`}
+                className="text-xs truncate"
                 style={{ color: "var(--text-secondary)" }}
+                title={`${z.label} (${z.min}-${z.max})`}
               >
-                {z.label}
+                {z.label} ({z.min}-{z.max})
               </span>
               <div
-                className="flex-1 h-2 rounded-full overflow-hidden"
+                key={`${z.key}-bar`}
+                className="h-2 rounded-full overflow-hidden"
                 style={{ background: "var(--bg)" }}
               >
                 <div
@@ -40,18 +46,20 @@ export function ZoneDurationBreakdown({
                 />
               </div>
               <span
-                className="font-display text-xs w-16 text-right shrink-0"
+                key={`${z.key}-dur`}
+                className="font-display text-xs text-right whitespace-nowrap"
                 style={{ color: "var(--text-primary)" }}
               >
                 {formatDurationShort(sec)}
               </span>
               <span
-                className="font-display text-xs w-10 text-right shrink-0"
+                key={`${z.key}-pct`}
+                className="font-display text-xs text-right whitespace-nowrap"
                 style={{ color: "var(--text-tertiary)" }}
               >
                 %{Math.round(pct)}
               </span>
-            </div>
+            </>
           );
         })}
       </div>

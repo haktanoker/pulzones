@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getWeatherForActivity, WeatherInfo } from "./weather";
 
 const ACTIVITIES_DIR = path.join(process.cwd(), "data", "activities");
 
@@ -55,6 +56,7 @@ export interface CachedActivity {
   description?: string;
   splits_metric?: CachedSplit[];
   streams: CachedStreams;
+  weather?: WeatherInfo | null;
   cachedAt: string;
 }
 
